@@ -123,16 +123,6 @@ function Teller() {
   }, [cardQueueDOM]);
 
   useEffect(() => {
-    const interval = window.setInterval(() => {
-      fetchQueues();
-    }, 1000);
-
-    return () => {
-      window.clearInterval(interval);
-    };
-  }, []);
-
-  useEffect(() => {
     return () => {
       if (sourceToken) {
         sourceToken.cancel("Cancelling...");
@@ -141,9 +131,17 @@ function Teller() {
   }, [sourceToken]);
 
   useEffect(() => {
+    let interval = null;
+
     if (user && user.window && user.window.uuid) {
-      fetchQueues(user.window.uuid);
+      interval = fetchQueues(user.window.uuid);
     }
+
+    return () => {
+      if (interval !== null) {
+        window.clearInterval(interval);
+      }
+    };
   }, [user]);
 
   return (
