@@ -31,6 +31,10 @@ function MainView() {
     const interval = window.setInterval(() => {
       fetchQueues();
     }, 1000);
+
+    return () => {
+      window.clearInterval(interval);
+    };
   }, []);
 
   useEffect(() => {
