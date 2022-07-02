@@ -134,7 +134,11 @@ function Teller() {
     let interval = null;
 
     if (user && user.window && user.window.uuid) {
-      interval = fetchQueues(user.window.uuid);
+      fetchQueues(user.window.uuid);
+
+      interval = window.setInterval(() => {
+        fetchQueues(user.window.uuid);
+      }, 1000);
     }
 
     return () => {
