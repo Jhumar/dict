@@ -9,10 +9,9 @@ import { useStateValue } from "./../../contexts/StateProvider";
 import { GET, PATCH } from "../../utils/axios";
 
 function Teller() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
   const cardQueueDOM = useRef(null);
   const [queueListHeight, setQueueListHeight] = useState(0);
-  const [sourceToken, setSourceToken] = useState(null);
   const [queues, setQueues] = useState([]);
   const [currentQueue, setCurrentQueue] = useState(null);
   const [tickInterval, setTickInterval] = useState(null);
@@ -21,8 +20,6 @@ function Teller() {
 
   const fetchQueues = (uuid) => {
     const { request, source } = GET("/queue/" + uuid);
-
-    setSourceToken(source);
 
     request.then((res) => {
       setQueues(res.data.sub);
@@ -97,8 +94,6 @@ function Teller() {
       time_elapsed: ticks,
     });
 
-    setSourceToken(source);
-
     request.then((res) => {
       alert(res.data.message);
 
@@ -121,14 +116,6 @@ function Teller() {
 
     setQueueListHeight(`${cardQueueDOM.current.clientHeight}px`);
   }, [cardQueueDOM]);
-
-  useEffect(() => {
-    return () => {
-      if (sourceToken) {
-        sourceToken.cancel("Cancelling...");
-      }
-    };
-  }, [sourceToken]);
 
   useEffect(() => {
     let interval = null;
