@@ -4,6 +4,9 @@ import { useState } from 'react'
 
 
 import {
+  Button,
+  Col,
+  Row,
   Table
 } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
@@ -27,7 +30,14 @@ function UserHistory() {
 
   return (
     <>
-      <h1 className='mb-5'>User History</h1>
+      <Row>
+        <Col>
+          <h1 className='mb-5'>User History</h1>
+        </Col>
+        <Col className='text-end'>
+          <Button variant='primary'>Print</Button>
+        </Col>
+      </Row>
       <Table striped>
         <thead>
           <tr>

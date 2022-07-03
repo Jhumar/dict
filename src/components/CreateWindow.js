@@ -87,7 +87,7 @@ function CreateWindow() {
 
   return (
     <>
-      <h1 className='mb-5'>Create window</h1>
+      <h2 className='mb-5'>Add window</h2>
       {/* <Breadcrumb className='mb-4'>
         <Breadcrumb.Item href='asd'>asd</Breadcrumb.Item>
         <Breadcrumb.Item href='asd'>asd</Breadcrumb.Item>

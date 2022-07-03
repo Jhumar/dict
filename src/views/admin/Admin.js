@@ -26,7 +26,7 @@ function Admin() {
                   <Nav.Item>
                     <NavLink 
                       className={({ isActive }) => isActive ? 'btn text-start text-light d-block btn-primary mb-2' : 'btn text-start text-light d-block mb-2'} 
-                      to="/admin/">
+                      to="/admin/media">
                       Media
                     </NavLink>
                   </Nav.Item>

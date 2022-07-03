@@ -70,12 +70,12 @@ function CreateUser() {
 
   return (
     <>
-      <h1 className='mb-5'>Create new user</h1>
+      <h2 className='mb-5'>Add user</h2>
       <Form onSubmit={handleCreateUser}>
         <AlertError />
         <Row className='mb-3'>
           <Col lg={12}>
-            <Form.Group controlId='formUserFirstname'>
+            <Form.Group controlId='formUserPicture'>
               <Form.Label>Profile picture</Form.Label>
               <Form.Control type='file'/>
             </Form.Group>

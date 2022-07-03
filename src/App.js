@@ -28,7 +28,10 @@ import CreateWindow from './components/CreateWindow';
 import EditUser from './components/EditUser';
 import EditWindow from './components/EditWindow';
 import UserHistory from './components/UserHistory';
-import Media from './components/Media';
+import MediaList from './components/MediaList';
+import CreateMedia from './components/CreateMedia';
+import EditMedia from './components/EditMedia';
+import WindowsHistory from './components/WindowHistory';
 
 function App() {
   const navigate = useNavigate();
@@ -134,7 +137,9 @@ function App() {
         <Route path='/teller' element={<Teller />}/>
         <Route path='/guard' element={<Guard/>}/>
         <Route path='/admin' element={<Admin/>}>
-          <Route index element={<Media />}/>
+          <Route path='media' element={<MediaList />}/>
+          <Route path='media/create' element={<CreateMedia />}/>
+          <Route path='media/edit' element={<EditMedia />} />
           <Route path='user' element={<UsersList/>} /> 
           <Route path='user/create' element={<CreateUser/>}/>
           <Route path='user/:id' element={<EditUser />}/>
@@ -142,6 +147,7 @@ function App() {
           <Route path='windows/create' element={<CreateWindow />}/>
           <Route path='user/:id' element={<EditUser />}/>
           <Route path='windows/:id' element={<EditWindow />}/>
+          <Route path="windows/history" element={<WindowsHistory/>}/>
           <Route path='user/:id/history' element={<UserHistory />}/>
           <Route
             path="*"

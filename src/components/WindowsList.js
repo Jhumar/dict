@@ -5,6 +5,7 @@ import {
   FaTrashAlt,
   FaSearch,
   FaPlusCircle,
+  FaHistory
 } from "react-icons/fa";
 
 import { Col, InputGroup, FormControl } from "react-bootstrap";
@@ -50,6 +51,11 @@ function WindowsList() {
       });
     }
   };
+
+  const handleHistoryWindow = () => {
+    console.log('asdasd');
+  }
+
   return (
     <>
       <Col lg={5} className="d-flex ms-auto mb-3">
@@ -104,9 +110,18 @@ function WindowsList() {
 
                   <Button
                     variant="danger"
+                    className="me-2"
                     onClick={() => handleDeleteWindow(window.uuid)}
                   >
                     <FaTrashAlt />
+                  </Button>
+
+                  <Button
+                    variant="secondary"
+                    as={Link}
+                    to={`/admin/windows/history`}
+                  >
+                    <FaHistory/>
                   </Button>
                 </td>
               </tr>

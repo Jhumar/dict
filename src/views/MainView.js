@@ -69,12 +69,13 @@ function MainView() {
       <Container fluid className="p-0">
         <ViewingNavbar />
         <Row className="me-0">
-          <Col xl={8}>
+          <Col xl={9}>
             <Table striped className="text-center p-0">
               <thead>
                 <tr>
-                  <th className="w-50 fs-4">Window number</th>
-                  <th className="w-50 fs-4">Service number</th>
+                  <th className="fs-4">Department</th>
+                  <th className="fs-4">Window number</th>
+                  <th className="fs-4">Service number</th>
                 </tr>
               </thead>
               <tbody>
@@ -87,6 +88,7 @@ function MainView() {
                     )
                     .map((queue) => (
                       <tr key={queue.number}>
+                        <td className="w-50 fs-4">College of Hospitality Management and Tourism</td>
                         <td className="fs-4">{queue.window_name}</td>
                         <td className="fs-4">{queue.number}</td>
                       </tr>
@@ -102,7 +104,7 @@ function MainView() {
             </Table>
           </Col>
 
-          <Col xl={4} className="p-0">
+          <Col xl={3} className="p-0">
             <div className="d-flex flex-column">
               <div
                 style={{ height: "45vh" }}
@@ -121,9 +123,9 @@ function MainView() {
         </Row>
 
         {/* eslint-disable-next-line */}
-        <marquee className="bg-dark text-danger fixed-bottom fs-4">
+        {/* <marquee className="bg-dark text-danger fixed-bottom fs-4">
           LAGUNA STATE POLYTECHNIC UNIVERSITY
-        </marquee>
+        </marquee> */}
       </Container>
     </>
   );
