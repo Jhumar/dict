@@ -1,21 +1,18 @@
-import React from 'react'
+import React from "react";
 
-import {
-  Table,
-  Row,
-  Col,
-  Button
-} from 'react-bootstrap'
+import { Table, Row, Col, Button } from "react-bootstrap";
 
 function WindowsHistory() {
   return (
     <>
       <Row>
-        <Col> 
-          <h1 className='mb-5'>Window history</h1>
+        <Col>
+          <h1 className="mb-5">Window history</h1>
         </Col>
-        <Col className='text-end'>
-          <Button variant='primary'>Print</Button>
+        <Col className="text-end no-print">
+          <Button variant="primary" onClick={() => window.print()}>
+            Print
+          </Button>
         </Col>
       </Row>
       <Table striped>
@@ -41,7 +38,7 @@ function WindowsHistory() {
         </tbody>
       </Table>
     </>
-  )
+  );
 }
 
-export default WindowsHistory
+export default WindowsHistory;
