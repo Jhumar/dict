@@ -147,7 +147,7 @@ function App() {
           <Route path='windows/create' element={<CreateWindow />}/>
           <Route path='user/:id' element={<EditUser />}/>
           <Route path='windows/:id' element={<EditWindow />}/>
-          <Route path="windows/history" element={<WindowsHistory/>}/>
+          <Route path="windows/:id/history" element={<WindowsHistory/>}/>
           <Route path='user/:id/history' element={<UserHistory />}/>
           <Route
             path="*"

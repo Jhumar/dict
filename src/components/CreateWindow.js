@@ -142,7 +142,7 @@ function CreateWindow() {
                 <option value='College of Industrial Technology'>College of Industrial Technology</option>
                 <option value='College of Hospitality Management and Tourism'>College of Hospitality Management and Tourism</option>
                 <option value="College of Engineering">College of Engineering</option>
-                <option value="College of Teacher Education/Graduate Studies and Research">College of Teacher Education/Graduate Studies and Research</option>
+                <option value="College of Teacher Education/Graduate Studies and Research">College of Teacher Education</option>
               </Form.Select>
             )}
           </Col>
