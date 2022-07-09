@@ -1,8 +1,28 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { Table, Row, Col, Button } from "react-bootstrap";
 
+import { GET } from "../utils/axios";
+
 function WindowsHistory() {
+  const params = useParams();
+  const { id } = params;
+
+  const [history, setHistory] = useState([]);
+
+  const fetchHistory = () => {
+    const { request } = GET("/queue/" + id + "/history/window");
+
+    request.then((res) => setHistory(res.data.sub));
+  };
+
+  useEffect(() => {
+    fetchHistory();
+  }, []);
+
   return (
     <>
       <Row>
@@ -27,14 +47,23 @@ function WindowsHistory() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Date</td>
-            <td>Teller</td>
-            <td>Queue Number</td>
-            <td>Start Time</td>
-            <td>End Time</td>
-            <td>Time elapsed</td>
-          </tr>
+          {history.length > 0 ? (
+            history.map((h) => (
+              <tr>
+                <td>{h.date}</td>
+                <td>{h.number}</td>
+                <td>{h.start_time}</td>
+                <td>{h.end_time}</td>
+                <td>{h.time_elapsed} secs</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={5} className="text-center">
+                No data available
+              </td>
+            </tr>
+          )}
         </tbody>
       </Table>
     </>
