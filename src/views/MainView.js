@@ -19,20 +19,7 @@ function MainView() {
   };
 
   const [{ source }, dispatch] = useStateValue();
-  const [queues, setQueues] = useState([
-    {
-      number: "001",
-      window_name: "Kamote",
-    },
-    {
-      number: "001",
-      window_name: "Kamote 2",
-    },
-    {
-      number: "001",
-      window_name: "Kamote 3",
-    },
-  ]);
+  const [queues, setQueues] = useState([]);
 
   const fetchQueues = () => {
     const { request, source } = GET("/queue");
