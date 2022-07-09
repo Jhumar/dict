@@ -37,7 +37,7 @@ function MainView() {
   useEffect(() => {
     const interval = window.setInterval(() => {
       setPage(
-        (pageRef.current + 1) * QUEUE_PER_PAGE - 1 <= queues.length
+        (pageRef.current + 1) * QUEUE_PER_PAGE <= queues.length + QUEUE_PER_PAGE
           ? pageRef.current + 1
           : 1
       );
@@ -77,7 +77,7 @@ function MainView() {
               <thead>
                 <tr>
                   <th className="fs-4">Department</th>
-                  <th className="fs-4">Window number</th>
+                  <th className="fs-4">Window</th>
                   <th className="fs-4">Service number</th>
                 </tr>
               </thead>
@@ -92,7 +92,7 @@ function MainView() {
                     .map((queue) => (
                       <tr key={Math.random()}>
                         <td className="w-50 fs-4">
-                          College of Hospitality Management and Tourism
+                          {queue.department}
                         </td>
                         <td className="fs-4">{queue.window_name}</td>
                         <td className="fs-4">{queue.number}</td>
@@ -100,7 +100,7 @@ function MainView() {
                     ))
                 ) : (
                   <tr>
-                    <td colSpan={2} className="text-center">
+                    <td colSpan={3} className="text-center">
                       No queue available.
                     </td>
                   </tr>

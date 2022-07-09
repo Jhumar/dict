@@ -128,7 +128,7 @@ function WindowsList() {
                   <Button
                     variant="secondary"
                     as={Link}
-                    to={`/admin/windows/history`}
+                    to={`/admin/windows/${window.uuid}/history`}
                   >
                     <FaHistory />
                   </Button>

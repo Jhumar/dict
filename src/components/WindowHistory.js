@@ -51,6 +51,7 @@ function WindowsHistory() {
             history.map((h) => (
               <tr>
                 <td>{h.date}</td>
+                <td>{h.teller ? [h.teller.first_name, h.teller.last_name].join(' ') : '--'}</td>
                 <td>{h.number}</td>
                 <td>{h.start_time}</td>
                 <td>{h.end_time}</td>
@@ -59,7 +60,7 @@ function WindowsHistory() {
             ))
           ) : (
             <tr>
-              <td colSpan={5} className="text-center">
+              <td colSpan={6} className="text-center">
                 No data available
               </td>
             </tr>
