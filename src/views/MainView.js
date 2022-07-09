@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Container, Row, Col, Table } from "react-bootstrap";
 
@@ -10,9 +10,29 @@ import { GET } from "./../utils/axios";
 
 function MainView() {
   const QUEUE_PER_PAGE = 7;
-  const [page, setPage] = useState(1);
+  const [page, _setPage] = useState(1);
+
+  const pageRef = useRef(page);
+  const setPage = (data) => {
+    pageRef.current = data;
+    _setPage(data);
+  };
+
   const [{ source }, dispatch] = useStateValue();
-  const [queues, setQueues] = useState([]);
+  const [queues, setQueues] = useState([
+    {
+      number: "001",
+      window_name: "Kamote",
+    },
+    {
+      number: "001",
+      window_name: "Kamote 2",
+    },
+    {
+      number: "001",
+      window_name: "Kamote 3",
+    },
+  ]);
 
   const fetchQueues = () => {
     const { request, source } = GET("/queue");
@@ -29,27 +49,23 @@ function MainView() {
 
   useEffect(() => {
     const interval = window.setInterval(() => {
+      setPage(
+        (pageRef.current + 1) * QUEUE_PER_PAGE - 1 <= queues.length
+          ? pageRef.current + 1
+          : 1
+      );
+    }, 5000);
+
+    const interval1 = window.setInterval(() => {
       fetchQueues();
     }, 1000);
 
     return () => {
       window.clearInterval(interval);
+
+      window.clearInterval(interval1);
     };
   }, []);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setPage((prev) =>
-        (prev + 1) * QUEUE_PER_PAGE <= queues.length ? prev + 1 : 1
-      );
-    }, 5000);
-
-    return () => {
-      window.clearInterval(interval);
-    };
-  }, []);
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     return () => {
@@ -87,8 +103,10 @@ function MainView() {
                         i <= page * QUEUE_PER_PAGE - 1
                     )
                     .map((queue) => (
-                      <tr key={queue.number}>
-                        <td className="w-50 fs-4">College of Hospitality Management and Tourism</td>
+                      <tr key={Math.random()}>
+                        <td className="w-50 fs-4">
+                          College of Hospitality Management and Tourism
+                        </td>
                         <td className="fs-4">{queue.window_name}</td>
                         <td className="fs-4">{queue.number}</td>
                       </tr>
