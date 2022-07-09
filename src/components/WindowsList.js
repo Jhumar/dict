@@ -5,7 +5,7 @@ import {
   FaTrashAlt,
   FaSearch,
   FaPlusCircle,
-  FaHistory
+  FaHistory,
 } from "react-icons/fa";
 
 import { Col, InputGroup, FormControl } from "react-bootstrap";
@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import { DELETE, GET } from "../utils/axios.js";
 
 function WindowsList() {
+  const [q, setQ] = useState("");
   const [windows, setWindows] = useState([]);
   const [sourceToken, setSourceToken] = useState(null);
 
@@ -32,6 +33,10 @@ function WindowsList() {
   useEffect(() => {
     fetchWindows();
   }, []);
+
+  useEffect(() => {
+    fetchWindows(q);
+  }, [q]);
 
   useEffect(() => {
     return () => {
@@ -53,8 +58,8 @@ function WindowsList() {
   };
 
   const handleHistoryWindow = () => {
-    console.log('asdasd');
-  }
+    console.log("asdasd");
+  };
 
   return (
     <>
@@ -64,7 +69,11 @@ function WindowsList() {
             <FaSearch />
           </InputGroup.Text>
 
-          <FormControl placeholder="Search" aria-describedby="basic-addon1" />
+          <FormControl
+            placeholder="Search"
+            onChange={(e) => setQ(e.target.value)}
+            aria-describedby="basic-addon1"
+          />
         </InputGroup>
 
         <Link className="btn btn-primary text-group text-nowrap" to="create">
@@ -121,7 +130,7 @@ function WindowsList() {
                     as={Link}
                     to={`/admin/windows/history`}
                   >
-                    <FaHistory/>
+                    <FaHistory />
                   </Button>
                 </td>
               </tr>
