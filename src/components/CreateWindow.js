@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-import { Breadcrumb, Button, Col, Form, Row} from 'react-bootstrap'
+import { Breadcrumb, Modal, Button, Col, Form, Row} from 'react-bootstrap'
+
+import { FaPlus } from "react-icons/fa";
 
 import AlertError from './../components/AlertError';
 
@@ -12,6 +14,7 @@ function CreateWindow() {
   const [, dispatch] = useStateValue();
   const [hasDepartment, setHasDepartment] = useState(false);
   const [tellers, setTellers] = useState([]);
+  const [show, setShow] = useState(false);
   const [sourceToken, setSourceToken] = useState(null);
 
   const getAllTellers = () => {
@@ -65,6 +68,13 @@ function CreateWindow() {
       })
   };
 
+  const handleCloseModal = () => setShow(false);
+  const handalOpenModal = () => setShow(true);
+
+  const handleAddOffice = () => {
+    console.log('asd');
+  }
+
   useEffect(() => {
     getAllTellers();
   }, []);
@@ -84,6 +94,10 @@ function CreateWindow() {
     
     // Component did update
   }, [sourceToken]);
+
+  // const add_office = () => {
+  //   console.log('asd')
+  // }
 
   return (
     <>
@@ -118,7 +132,10 @@ function CreateWindow() {
           </Col>
           <Col className='mb-3' lg={6}>
             <Form.Group>
-              <Form.Label>Window type</Form.Label>
+              <Row>
+                <Col><Form.Label>Offices</Form.Label></Col>
+                <Col className='text-end'><FaPlus onClick={handalOpenModal} /></Col>
+              </Row>
               <Form.Select name='type' required>
                 <option value="" selected hidden>Select a window type</option>
                 <option value="cashier">Cashier</option>
@@ -155,6 +172,32 @@ function CreateWindow() {
           </Col>
         </Row>
       </Form>
+
+      <Modal show={show} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Office</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={handleAddOffice}>
+          <Modal.Body>
+            <Row>
+              <Col>
+                <Form.Group controlId='addOffice'>
+                  <Form.Label>Office name</Form.Label>
+                  <Form.Control type='text' name='add_office' placeholder='E.g. Registrar' required/>
+                </Form.Group>
+              </Col>
+            </Row>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Close
+            </Button>
+            <Button type='submit' variant="primary">
+              Submit
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
     </>
   )
 }

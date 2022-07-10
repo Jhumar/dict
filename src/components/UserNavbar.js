@@ -21,7 +21,7 @@ function UserNavbar() {
   const [{user},] = useStateValue();
 
   return (
-    <Navbar className='sticky-top d-flex justify-content-between align-items-center px-3' style={{zIndex: 2000}} bg='dark' variant='dark'>
+    <Navbar className='sticky-top d-flex justify-content-between align-items-center px-3' style={{zIndex: 100}} bg='dark' variant='dark'>
       <Container>
         <Navbar.Brand className='d-flex align-items-center'>
           <img className='me-3' src={Logo} alt="lspu-logo" width={50} height={50}/>
