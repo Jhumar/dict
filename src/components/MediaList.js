@@ -11,9 +11,15 @@ import {
   FaAlignCenter,
 } from "react-icons/fa";
 
-import { Button, Row, Table, Col, InputGroup, FormControl } from "react-bootstrap";
-import BootstrapSwitchButton from 'bootstrap-switch-button-react'
-
+import {
+  Button,
+  Row,
+  Table,
+  Col,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 import { Link } from "react-router-dom";
 import { useStateValue } from "./../contexts/StateProvider";
@@ -21,6 +27,9 @@ import { GET, DELETE, PATCH } from "../utils/axios";
 
 function MediaList() {
   const [{ source }, dispatch] = useStateValue();
+
+  const [_checked, setChecked] = useState(true);
+  const [settings, setSettings] = useState([]);
 
   const [q, setQ] = useState("");
   const [medias, setMedias] = useState([]);
@@ -84,11 +93,41 @@ function MediaList() {
     });
   };
 
+  const getSettings = () => {
+    const { source, request } = GET("/settings");
+
+    request.then((res) => {
+      setSettings(res.data.sub);
+      setChecked(res.data.sub[0].value === "true");
+    });
+  };
+
+  const handleOnChange = (checked) => {
+    setChecked(checked);
+
+    const { source, request } = PATCH("/settings", {
+      name: "show_media",
+      value: `${checked}`,
+    });
+
+    request.then((res) => {
+      alert(res.data.message);
+    });
+  };
+
+  useEffect(() => {
+    getSettings();
+  }, []);
+
   return (
     <>
       <Row>
-        <Col lg={7} className='d-flex align-items-center mb-3'>
-          <BootstrapSwitchButton checked={true} width={100} />
+        <Col lg={7} className="d-flex align-items-center mb-3">
+          <BootstrapSwitchButton
+            checked={_checked}
+            onChange={handleOnChange}
+            width={100}
+          />
           <span className="ms-2 fs-5">Show media in main screen</span>
         </Col>
         <Col lg={5} className="d-flex ms-auto mb-3">
