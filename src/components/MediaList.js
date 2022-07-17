@@ -10,7 +10,9 @@ import {
   FaEllipsisV
 } from "react-icons/fa";
 
-import { Button, Table, Col, InputGroup, FormControl } from "react-bootstrap";
+import { Button, Row, Table, Col, InputGroup, FormControl } from "react-bootstrap";
+import BootstrapSwitchButton from 'bootstrap-switch-button-react'
+
 
 import { Link } from "react-router-dom";
 import { useStateValue } from "./../contexts/StateProvider";
@@ -74,24 +76,30 @@ function MediaList() {
 
   return (
     <>
-      <Col lg={5} className="d-flex ms-auto mb-3">
-        <InputGroup className="me-2">
-          <InputGroup.Text>
-            <FaSearch />
-          </InputGroup.Text>
+      <Row>
+        <Col lg={7} className='d-flex align-items-center mb-3'>
+          <BootstrapSwitchButton checked={true} width={100} />
+          <span className="ms-2 fs-5">Show media in main screen</span>
+        </Col>
+        <Col lg={5} className="d-flex ms-auto mb-3">
+          <InputGroup className="me-2">
+            <InputGroup.Text>
+              <FaSearch />
+            </InputGroup.Text>
 
-          <FormControl
-            placeholder="Search"
-            onChange={(e) => setQ(e.target.value)}
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
+            <FormControl
+              placeholder="Search"
+              onChange={(e) => setQ(e.target.value)}
+              aria-describedby="basic-addon1"
+            />
+          </InputGroup>
 
-        <Link className="btn btn-primary text-group text-nowrap" to="create">
-          <FaPlusCircle className="me-2" />
-          Add
-        </Link>
-      </Col>
+          <Link className="btn btn-primary text-group text-nowrap" to="create">
+            <FaPlusCircle className="me-2" />
+            Add
+          </Link>
+        </Col>
+      </Row>
       <Table striped>
         <thead>
           <tr>
