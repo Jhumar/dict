@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Breadcrumb, Modal, Button, Col, Form, Row } from "react-bootstrap";
 
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaTrashAlt} from "react-icons/fa";
 
 import AlertError from "./../components/AlertError";
 

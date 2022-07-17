@@ -7,6 +7,7 @@ import {
   FaTrashAlt,
   FaSearch,
   FaPlusCircle,
+  FaEllipsisV
 } from "react-icons/fa";
 
 import { Button, Table, Col, InputGroup, FormControl } from "react-bootstrap";
@@ -123,6 +124,19 @@ function MediaList() {
                   >
                     <FaTrashAlt />
                   </Button>
+
+                  <div class="dropdown">
+                      <Button
+                      variant="secondary"
+                      className="me-2 dropbtn"
+                      >
+                      <FaEllipsisV />
+                    </Button>
+                    <div class="dropdown-content">
+                      <Button variant="light">Show to screen 1</Button>
+                      <Button variant="light">Show to screen 2</Button>
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))
