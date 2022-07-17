@@ -7,14 +7,15 @@ import {
   FaTrashAlt,
   FaSearch,
   FaPlusCircle,
-  FaEllipsisV
+  FaEllipsisV,
+  FaAlignCenter,
 } from "react-icons/fa";
 
 import { Button, Table, Col, InputGroup, FormControl } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 import { useStateValue } from "./../contexts/StateProvider";
-import { GET, DELETE } from "../utils/axios";
+import { GET, DELETE, PATCH } from "../utils/axios";
 
 function MediaList() {
   const [{ source }, dispatch] = useStateValue();
@@ -72,6 +73,15 @@ function MediaList() {
     }
   };
 
+  const handleSetScreen = (uuid, screen) => {
+    const { source, request } = PATCH(`/media/${uuid}/set`, { screen });
+
+    request.then((res) => {
+      alert(res.data.message);
+      fetchMedias();
+    });
+  };
+
   return (
     <>
       <Col lg={5} className="d-flex ms-auto mb-3">
@@ -97,6 +107,7 @@ function MediaList() {
           <tr>
             <th>Media ID</th>
             <th>Name</th>
+            <th>Screen</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -107,6 +118,7 @@ function MediaList() {
               <tr>
                 <td>{media.uuid}</td>
                 <td>{media.name}</td>
+                <td>{media.slot || "--"}</td>
                 <td className="d-flex">
                   <Button
                     as={Link}
@@ -126,15 +138,22 @@ function MediaList() {
                   </Button>
 
                   <div class="dropdown">
-                      <Button
-                      variant="secondary"
-                      className="me-2 dropbtn"
-                      >
+                    <Button variant="secondary" className="me-2 dropbtn">
                       <FaEllipsisV />
                     </Button>
                     <div class="dropdown-content">
-                      <Button variant="light">Show to screen 1</Button>
-                      <Button variant="light">Show to screen 2</Button>
+                      <Button
+                        variant="light"
+                        onClick={() => handleSetScreen(`${media.uuid}`, 1)}
+                      >
+                        Show to screen 1
+                      </Button>
+                      <Button
+                        variant="light"
+                        onClick={() => handleSetScreen(`${media.uuid}`, 2)}
+                      >
+                        Show to screen 2
+                      </Button>
                     </div>
                   </div>
                 </td>
