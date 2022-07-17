@@ -6,7 +6,7 @@ import ViewingNavbar from "./../components/ViewingNavbar";
 
 import { useStateValue } from "../contexts/StateProvider";
 
-import { GET } from "./../utils/axios";
+import { API_URL, GET } from "./../utils/axios";
 
 function MainView() {
   const QUEUE_PER_PAGE = 7;
@@ -20,6 +20,24 @@ function MainView() {
 
   const [{ source }, dispatch] = useStateValue();
   const [queues, setQueues] = useState([]);
+  const [ads, setAds] = useState([]);
+  const [settings, setSettings] = useState([]);
+
+  const getAds = () => {
+    const { request, source } = GET("/media/p/r");
+
+    request.then((res) => {
+      setAds(res.data.sub);
+    });
+  };
+
+  const getSettings = () => {
+    const { request, source } = GET("/settings");
+
+    request.then((res) => {
+      setSettings(res.data.sub);
+    });
+  };
 
   const fetchQueues = () => {
     const { request, source } = GET("/queue");
@@ -35,6 +53,9 @@ function MainView() {
   };
 
   useEffect(() => {
+    getAds();
+    getSettings();
+
     const interval = window.setInterval(() => {
       setPage(
         (pageRef.current + 1) * QUEUE_PER_PAGE <= queues.length + QUEUE_PER_PAGE
@@ -72,7 +93,16 @@ function MainView() {
       <Container fluid className="p-0">
         <ViewingNavbar />
         <Row className="me-0">
-          <Col xl={9}>
+          <Col
+            xl={
+              settings &&
+              settings[0] &&
+              settings[0].value &&
+              settings[0].value === "true"
+                ? 9
+                : 12
+            }
+          >
             <Table striped className="text-center p-0">
               <thead>
                 <tr>
@@ -91,9 +121,7 @@ function MainView() {
                     )
                     .map((queue) => (
                       <tr key={Math.random()}>
-                        <td className="w-50 fs-4">
-                          {queue.department}
-                        </td>
+                        <td className="w-50 fs-4">{queue.department}</td>
                         <td className="fs-4">{queue.window_name}</td>
                         <td className="fs-4">{queue.number}</td>
                       </tr>
@@ -109,9 +137,54 @@ function MainView() {
             </Table>
           </Col>
 
-          <Col xl={3} className="p-0">
+          <Col
+            xl={3}
+            className={{
+              "p-0": true,
+              "d-none":
+                settings &&
+                settings[0] &&
+                settings[0].value &&
+                settings[0].value === "false",
+            }}
+          >
             <div className="d-flex flex-column">
-              <div
+              {(ads || []).map((x) => (
+                <div style={{ height: "45vh", position: "relative" }}>
+                  {["png", "jpeg", "jpg"].includes(
+                    x.path.split(".").pop().toLowerCase()
+                  ) && (
+                    <img
+                      src={`${API_URL}/media/${x.uuid}/preview`}
+                      className="img-fluid"
+                      alt={x.name}
+                    />
+                  )}
+
+                  {["mp4", "mpeg"].includes(
+                    x.path.split(".").pop().toLowerCase()
+                  ) && (
+                    <video
+                      width={720}
+                      height={360}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "fill",
+                      }}
+                      muted
+                      autoPlay
+                      loop
+                    >
+                      <source
+                        src={`${API_URL}/media/${x.uuid}/preview`}
+                      ></source>
+                      Kamote
+                    </video>
+                  )}
+                </div>
+              ))}
+              {/* <div
                 style={{ height: "45vh" }}
                 className="d-flex justify-content-center align-items-center bg-secondary"
               >
@@ -122,7 +195,7 @@ function MainView() {
                 className="d-flex justify-content-center align-items-center bg-secondary"
               >
                 News
-              </div>
+              </div> */}
             </div>
           </Col>
         </Row>
