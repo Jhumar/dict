@@ -17,6 +17,7 @@ function Guard() {
   const [queue, setQueue] = useState(null);
   const [queues, setQueues] = useState([]);
   const [selectedWindowId, setSelectedWindowId] = useState(null);
+  const [offices, setOffices] = useState([]);
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -39,6 +40,14 @@ function Guard() {
       fetchQueues();
     },
   });
+
+  const getAllOffices = () => {
+    const { source, request } = GET("/office?q=");
+
+    request.then((res) => {
+      setOffices(res.data.sub);
+    });
+  };
 
   const fetchQueues = () => {
     const { request, source } = GET("/queue");
@@ -111,6 +120,8 @@ function Guard() {
   }, [type]);
 
   useEffect(() => {
+    getAllOffices();
+
     const interval = window.setInterval(() => {
       fetchQueues();
     }, 1000);
@@ -171,9 +182,11 @@ function Guard() {
                   <option value="" hidden>
                     Select a type
                   </option>
-                  <option value="cashier">Cashier</option>
-                  <option value="registrar">Registrar</option>
-                  <option value="accounting">Accounting</option>
+                  {(offices || []).map((x) => (
+                    <option value={x.uuid} key={x.uuid}>
+                      {x.name}
+                    </option>
+                  ))}
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-4">
