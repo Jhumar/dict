@@ -47,7 +47,7 @@ function UserNavbar() {
           <Dropdown.Menu>
             <Dropdown.Item>
               <FaUserAlt className='me-3' />
-              <span>Profile</span>
+              <span>Change password</span>
             </Dropdown.Item>
             <Dropdown.Item as={Link} to='/logout'>
               <FaPowerOff className='me-3' />

@@ -111,7 +111,7 @@ function MediaList() {
     });
 
     request.then((res) => {
-      alert(res.data.message);
+      console.log(res.data.message);
     });
   };
 
@@ -128,7 +128,7 @@ function MediaList() {
             onChange={handleOnChange}
             width={100}
           />
-          <span className="ms-2 fs-5">Show media in main screen</span>
+          <span className="ms-2 fs-5">Show media  main screen</span>
         </Col>
         <Col lg={5} className="d-flex ms-auto mb-3">
           <InputGroup className="me-2">
@@ -208,7 +208,7 @@ function MediaList() {
             ))
           ) : (
             <tr>
-              <td colSpan={3} className="text-center">
+              <td colSpan={4} className="text-center">
                 No media available
               </td>
             </tr>

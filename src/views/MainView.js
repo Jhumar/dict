@@ -68,10 +68,20 @@ function MainView() {
       fetchQueues();
     }, 1000);
 
+    const interval2 = window.setInterval(() => {
+      getAds();
+    }, 1000);
+
+    const interval3 = window.setInterval(() => {
+      getSettings();
+    }, 1000);
+
     return () => {
       window.clearInterval(interval);
 
       window.clearInterval(interval1);
+      window.clearInterval(interval2);
+      window.clearInterval(interval3);
     };
   }, []);
 
@@ -106,9 +116,9 @@ function MainView() {
             <Table striped className="text-center p-0">
               <thead>
                 <tr>
-                  <th className="fs-4">Department</th>
-                  <th className="fs-4">Window</th>
-                  <th className="fs-4">Service number</th>
+                  <th className="fs-2">Department</th>
+                  <th className="fs-2">Window</th>
+                  <th className="fs-2">Service number</th>
                 </tr>
               </thead>
               <tbody>
@@ -121,14 +131,14 @@ function MainView() {
                     )
                     .map((queue) => (
                       <tr key={Math.random()}>
-                        <td className="w-50 fs-4">{queue.department}</td>
-                        <td className="fs-4">{queue.window_name}</td>
-                        <td className="fs-4">{queue.number}</td>
+                        <td className="w-50 fs-2 py-3 text-start ps-3">{queue.department}</td>
+                        <td className="fs-2 py-3">{queue.window_name}</td>
+                        <td className="fs-2 py-3">{queue.number}</td>
                       </tr>
                     ))
                 ) : (
                   <tr>
-                    <td colSpan={3} className="text-center">
+                    <td colSpan={3} className="text-center fs-4 py-3">
                       No queue available.
                     </td>
                   </tr>
@@ -156,7 +166,7 @@ function MainView() {
                   ) && (
                     <img
                       src={`${API_URL}/media/${x.uuid}/preview`}
-                      className="img-fluid"
+                      className="img-fluid w-100 h-100"
                       alt={x.name}
                     />
                   )}
@@ -165,8 +175,8 @@ function MainView() {
                     x.path.split(".").pop().toLowerCase()
                   ) && (
                     <video
-                      width={720}
-                      height={360}
+                      width='100%'
+                      height='360'
                       style={{
                         width: "100%",
                         height: "100%",
@@ -179,7 +189,6 @@ function MainView() {
                       <source
                         src={`${API_URL}/media/${x.uuid}/preview`}
                       ></source>
-                      Kamote
                     </video>
                   )}
                 </div>
