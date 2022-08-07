@@ -148,6 +148,18 @@ function MediaList() {
             Add
           </Link>
         </Col>
+
+        <Col lg={12} className="d-flex ms-auto mb-3">
+          <InputGroup className="">
+            <FormControl
+              placeholder="Input annoucement on marquee"
+            />
+          </InputGroup>
+
+          <Button className="btn btn-primary text-group text-nowrap">
+            Push
+          </Button>
+        </Col>
       </Row>
       <Table striped>
         <thead>

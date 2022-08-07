@@ -109,14 +109,14 @@ function MainView() {
               settings[0] &&
               settings[0].value &&
               settings[0].value === "true"
-                ? 9
+                ? 8
                 : 12
             }
           >
             <Table striped className="text-center p-0">
               <thead>
                 <tr>
-                  <th className="fs-2">Department</th>
+                  <th className="fs-2">Offices</th>
                   <th className="fs-2">Window</th>
                   <th className="fs-2">Service number</th>
                 </tr>
@@ -148,7 +148,7 @@ function MainView() {
           </Col>
 
           <Col
-            xl={3}
+            xl={4}
             className={{
               "p-0": true,
               "d-none":
@@ -160,7 +160,7 @@ function MainView() {
           >
             <div className="d-flex flex-column">
               {(ads || []).map((x) => (
-                <div style={{ height: "45vh", position: "relative" }}>
+                <div style={{ height: "43vh", position: "relative" }} className="border border-2 border-primary">
                   {["png", "jpeg", "jpg"].includes(
                     x.path.split(".").pop().toLowerCase()
                   ) && (
@@ -210,9 +210,9 @@ function MainView() {
         </Row>
 
         {/* eslint-disable-next-line */}
-        {/* <marquee className="bg-dark text-danger fixed-bottom fs-4">
+        <marquee className="bg-dark text-danger fixed-bottom fs-3">
           LAGUNA STATE POLYTECHNIC UNIVERSITY
-        </marquee> */}
+        </marquee>
       </Container>
     </>
   );

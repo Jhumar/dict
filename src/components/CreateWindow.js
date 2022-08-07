@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Breadcrumb, Modal, Button, Col, Form, Row } from "react-bootstrap";
+import {Modal, Button, Col, Form, Row } from "react-bootstrap";
 
-import { FaPlus, FaTrashAlt} from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 
 import AlertError from "./../components/AlertError";
 
