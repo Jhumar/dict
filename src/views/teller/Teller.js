@@ -202,7 +202,7 @@ function Teller() {
                   className="fs-5 fw-bold text-center py-4 sticky-top"
                   variant="dark"
                 >
-                  {user && user.window && user.window.name}
+                  {`Window ${user && user.window && user.window.name}`}
                 </ListGroup.Item>
                 {(queues || []).length > 0 ? (
                   (queues || []).map((q) => {

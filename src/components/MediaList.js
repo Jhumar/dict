@@ -18,6 +18,7 @@ import {
   Col,
   InputGroup,
   FormControl,
+  Form,
 } from "react-bootstrap";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
@@ -149,17 +150,35 @@ function MediaList() {
           </Link>
         </Col>
 
-        <Col lg={12} className="d-flex ms-auto mb-3">
-          <InputGroup className="">
-            <FormControl
-              placeholder="Input annoucement on marquee"
-            />
-          </InputGroup>
+        <Row>
+          <Form className="d-flex">
+            <Col lg={10} className="d-flex ms-auto mb-3 me-2">
+              <InputGroup className="">
+                <FormControl
+                  type='text'
+                  placeholder="Input annoucement on marquee"
+                />
+              </InputGroup>
 
-          <Button className="btn btn-primary text-group text-nowrap">
-            Push
-          </Button>
-        </Col>
+              <Button className="btn btn-primary text-group text-nowrap">
+                Push
+              </Button>
+            </Col>
+            <Col lg={2} className="d-flex ms-auto mb-3">
+              <InputGroup className="me-2">
+                <FormControl
+                  type='number'
+                  placeholder="00"
+                />
+              </InputGroup>
+
+              <Button className="btn btn-primary text-group text-nowrap">
+                Set 
+              </Button>
+            </Col>
+            </Form>
+        </Row>
+        
       </Row>
       <Table striped>
         <thead>

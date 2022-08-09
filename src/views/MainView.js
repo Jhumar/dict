@@ -9,6 +9,9 @@ import { useStateValue } from "../contexts/StateProvider";
 import { API_URL, GET } from "./../utils/axios";
 
 function MainView() {
+
+  // date and time
+
   const QUEUE_PER_PAGE = 7;
   const [page, _setPage] = useState(1);
 
@@ -131,7 +134,7 @@ function MainView() {
                     )
                     .map((queue) => (
                       <tr key={Math.random()}>
-                        <td className="w-50 fs-2 py-3 text-start ps-3">{queue.department}</td>
+                        <td className="w-50 fs-2 py-3 text-start ps-3">{queue.offices}</td>
                         <td className="fs-2 py-3">{queue.window_name}</td>
                         <td className="fs-2 py-3">{queue.number}</td>
                       </tr>
@@ -160,7 +163,7 @@ function MainView() {
           >
             <div className="d-flex flex-column">
               {(ads || []).map((x) => (
-                <div style={{ height: "43vh", position: "relative" }} className="border border-2 border-primary">
+                <div style={{ height: "43vh", position: "relative" }} className="border border-2 border-dark">
                   {["png", "jpeg", "jpg"].includes(
                     x.path.split(".").pop().toLowerCase()
                   ) && (
