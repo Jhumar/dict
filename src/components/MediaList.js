@@ -129,7 +129,7 @@ function MediaList() {
             onChange={handleOnChange}
             width={100}
           />
-          <span className="ms-2 fs-5">Show media  main screen</span>
+          <span className="ms-2 fs-5">Show media main screen</span>
         </Col>
         <Col lg={5} className="d-flex ms-auto mb-3">
           <InputGroup className="me-2">
@@ -155,7 +155,7 @@ function MediaList() {
             <Col lg={10} className="d-flex ms-auto mb-3 me-2">
               <InputGroup className="">
                 <FormControl
-                  type='text'
+                  type="text"
                   placeholder="Input annoucement on marquee"
                 />
               </InputGroup>
@@ -166,19 +166,15 @@ function MediaList() {
             </Col>
             <Col lg={2} className="d-flex ms-auto mb-3">
               <InputGroup className="me-2">
-                <FormControl
-                  type='number'
-                  placeholder="00"
-                />
+                <FormControl type="number" placeholder="00" />
               </InputGroup>
 
               <Button className="btn btn-primary text-group text-nowrap">
-                Set 
+                Set
               </Button>
             </Col>
-            </Form>
+          </Form>
         </Row>
-        
       </Row>
       <Table striped>
         <thead>
@@ -231,6 +227,12 @@ function MediaList() {
                         onClick={() => handleSetScreen(`${media.uuid}`, 2)}
                       >
                         Show to screen 2
+                      </Button>
+                      <Button
+                        variant="light"
+                        onClick={() => handleSetScreen(`${media.uuid}`, null)}
+                      >
+                        Set to None
                       </Button>
                     </div>
                   </div>
