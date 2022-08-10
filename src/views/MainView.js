@@ -50,7 +50,13 @@ function MainView() {
     const { request, source } = GET("/settings");
 
     request.then((res) => {
-      setSettings(res.data.sub);
+      const settings = res.data.sub.reduce((prev, curr) => {
+        prev[curr.name] = curr.value;
+
+        return prev;
+      }, {});
+
+      setSettings(settings);
     });
   };
 
@@ -68,7 +74,6 @@ function MainView() {
   };
 
   const checkLoop = () => {
-    console.log("Looping");
     // if ((adsRef.current.slot_one || []).length > 0) {
     //   const currentMediaAtSlotOne =
     //     adsRef.current.slot_one[INDEX_OF_MEDIA_AT_SLOT_ONE];
@@ -149,14 +154,6 @@ function MainView() {
     getAds();
     getSettings();
 
-    const interval = window.setInterval(() => {
-      setPage(
-        (pageRef.current + 1) * QUEUE_PER_PAGE <= queues.length + QUEUE_PER_PAGE
-          ? pageRef.current + 1
-          : 1
-      );
-    }, 5000);
-
     const interval1 = window.setInterval(() => {
       fetchQueues();
     }, 1000);
@@ -174,14 +171,30 @@ function MainView() {
     }, 1000);
 
     return () => {
-      window.clearInterval(interval);
-
       window.clearInterval(interval1);
       // window.clearInterval(interval2);
       window.clearInterval(interval3);
       window.clearInterval(adsInterval);
     };
   }, []);
+
+  useEffect(() => {
+    if (!settings.page_speed) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setPage(
+        (pageRef.current + 1) * QUEUE_PER_PAGE <= queues.length + QUEUE_PER_PAGE
+          ? pageRef.current + 1
+          : 1
+      );
+    }, parseInt(settings.page_speed) * 1000);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, [settings.page_speed]);
 
   useEffect(() => {
     return () => {
@@ -201,16 +214,7 @@ function MainView() {
       <Container fluid className="p-0">
         <ViewingNavbar />
         <Row className="me-0">
-          <Col
-            xl={
-              settings &&
-              settings[0] &&
-              settings[0].value &&
-              settings[0].value === "true"
-                ? 8
-                : 12
-            }
-          >
+          <Col xl={settings.show_media === "true" ? 8 : 12}>
             <Table striped className="text-center p-0">
               <thead>
                 <tr>

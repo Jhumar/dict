@@ -31,6 +31,7 @@ function MediaList() {
 
   const [_checked, setChecked] = useState(true);
   const [settings, setSettings] = useState([]);
+  const [speed, setSpeed] = useState(1);
 
   const [q, setQ] = useState("");
   const [medias, setMedias] = useState([]);
@@ -98,8 +99,16 @@ function MediaList() {
     const { source, request } = GET("/settings");
 
     request.then((res) => {
-      setSettings(res.data.sub);
-      setChecked(res.data.sub[0].value === "true");
+      const settings = res.data.sub.reduce((prev, curr) => {
+        prev[curr.name] = curr.value;
+
+        return prev;
+      }, {});
+
+      setSettings(settings);
+
+      setChecked(settings.show_media === "true");
+      setSpeed(settings.page_speed || 1);
     });
   };
 
@@ -109,6 +118,17 @@ function MediaList() {
     const { source, request } = PATCH("/settings", {
       name: "show_media",
       value: `${checked}`,
+    });
+
+    request.then((res) => {
+      console.log(res.data.message);
+    });
+  };
+
+  const handleSetSpeedClick = () => {
+    const { source, request } = PATCH("/settings", {
+      name: "page_speed",
+      value: speed,
     });
 
     request.then((res) => {
@@ -166,10 +186,19 @@ function MediaList() {
             </Col>
             <Col lg={2} className="d-flex ms-auto mb-3">
               <InputGroup className="me-2">
-                <FormControl type="number" placeholder="00" />
+                <FormControl
+                  type="number"
+                  placeholder="00"
+                  value={speed}
+                  onChange={(e) => setSpeed(parseInt(e.target.value))}
+                  min={1}
+                />
               </InputGroup>
 
-              <Button className="btn btn-primary text-group text-nowrap">
+              <Button
+                className="btn btn-primary text-group text-nowrap"
+                onClick={handleSetSpeedClick}
+              >
                 Set
               </Button>
             </Col>
