@@ -234,7 +234,7 @@ function MainView() {
                     .map((queue) => (
                       <tr key={Math.random()}>
                         <td className="w-50 fs-2 py-3 text-start ps-3">
-                          {queue.offices}
+                          {queue.office.name}
                         </td>
                         <td className="fs-2 py-3">{queue.window_name}</td>
                         <td className="fs-2 py-3">{queue.number}</td>
