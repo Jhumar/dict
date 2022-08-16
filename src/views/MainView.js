@@ -255,11 +255,7 @@ function MainView() {
             xl={4}
             className={{
               "p-0": true,
-              "d-none":
-                settings &&
-                settings[0] &&
-                settings[0].value &&
-                settings[0].value === "false",
+              "d-none": settings.show_media !== "true",
             }}
           >
             <div className="d-flex flex-column">
