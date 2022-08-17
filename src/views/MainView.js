@@ -234,7 +234,7 @@ function MainView() {
                     .map((queue) => (
                       <tr key={Math.random()}>
                         <td className="w-50 fs-2 py-3 text-start ps-3">
-                          {queue.offices}
+                          {queue.office.name}
                         </td>
                         <td className="fs-2 py-3">{queue.window_name}</td>
                         <td className="fs-2 py-3">{queue.number}</td>
@@ -255,11 +255,7 @@ function MainView() {
             xl={4}
             className={{
               "p-0": true,
-              "d-none":
-                settings &&
-                settings[0] &&
-                settings[0].value &&
-                settings[0].value === "false",
+              "d-none": settings.show_media !== "true",
             }}
           >
             <div className="d-flex flex-column">
