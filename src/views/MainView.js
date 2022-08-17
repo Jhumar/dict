@@ -277,7 +277,8 @@ function MainView() {
                         src={`${API_URL}/media/${
                           ads.slot_one[INDEX_OF_MEDIA_AT_SLOT_ONE.current].uuid
                         }/preview`}
-                        className="img-fluid w-100 h-100"
+                        style={{ height: "360px"}}
+                        className="img-fluid w-100"
                         alt={
                           ads.slot_one[INDEX_OF_MEDIA_AT_SLOT_ONE.current].name
                         }
@@ -297,7 +298,6 @@ function MainView() {
                         height="360"
                         style={{
                           width: "100%",
-                          height: "100%",
                           objectFit: "fill",
                         }}
                         muted
@@ -331,7 +331,8 @@ function MainView() {
                         src={`${API_URL}/media/${
                           ads.slot_two[INDEX_OF_MEDIA_AT_SLOT_TWO.current].uuid
                         }/preview`}
-                        className="img-fluid w-100 h-100"
+                        className="img-fluid w-100"
+                        style={{ height: "360px"}}
                         alt={
                           ads.slot_two[INDEX_OF_MEDIA_AT_SLOT_TWO.current].name
                         }
@@ -351,7 +352,6 @@ function MainView() {
                         height="360"
                         style={{
                           width: "100%",
-                          height: "100%",
                           objectFit: "fill",
                         }}
                         muted
