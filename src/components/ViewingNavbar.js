@@ -31,21 +31,28 @@ function ViewingNavbar() {
   return (
     <Navbar className="sticky-top d-flex justify-content-between" bg="dark" variant='dark'>
       <Navbar.Brand className="d-flex align-items-center px-3">
-        <img className="me-3" src={logo} width="55" height="55" alt='LSPU-LOGO' />
+        <img className="me-3" src={logo} width="65" height="65" alt='LSPU-LOGO' />
         <div className="d-flex flex-column">
-          <span className='fs-5'>LAGUNA STATE POLYTECHNIC UNIVERSITY</span>
-          <span className='fs-5'>SAN PABLO CITY CAMPUS</span>
+          <span className='fs-4'>LAGUNA STATE POLYTECHNIC UNIVERSITY</span>
+          <span className='fs-4'>SAN PABLO CITY CAMPUS</span>
         </div>
       </Navbar.Brand>
 
-      <Navbar.Brand className="d-flex align-items-center px-3">
-        <div className="d-flex flex-column align-items-end">
-          <div className="date-time-wrapper">
-            <span className='fs-5'>{`${day}, ${time.toLocaleTimeString()}`}</span>
-          </div>
+      <Navbar.Brand className='d-flex align-items-center'>
+        <div className="d-flex flex-column align-items-center">
           <div className="date">
             {/* <p>{document.write(`${monthLabel[current.getMonth()]}`)}</p> */}
-            <span className='fs-5'>{date}</span>
+            <span className='fs-4'>{date}</span>
+          </div>
+          <div className="date-time-wrapper">
+            <span className='fs-4'>{`${day}`}</span>
+          </div>
+        </div>
+
+        <div className="ms-4 ps-4 py-1 border border-2 border-top-0 border-bottom-0 border-end-0">
+          <div className="date">
+            {/* <p>{document.write(`${monthLabel[current.getMonth()]}`)}</p> */}
+            <span className='fs-2'>{time.toLocaleTimeString()}</span>
           </div>
         </div>
       </Navbar.Brand>

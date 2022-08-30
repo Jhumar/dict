@@ -215,12 +215,12 @@ function MainView() {
         <ViewingNavbar />
         <Row className="me-0">
           <Col xl={settings.show_media === "true" ? 8 : 12}>
-            <Table striped className="text-center p-0">
+            <Table striped className="text-center p-0" style={{tableLayout: "fixed"}}>
               <thead>
                 <tr>
-                  <th className="fs-2">Offices</th>
-                  <th className="fs-2">Window</th>
-                  <th className="fs-2">Service number</th>
+                  <th className="fs-1">Office</th>
+                  <th className="fs-1">Window</th>
+                  <th className="fs-1">Now Serving</th>
                 </tr>
               </thead>
               <tbody>
@@ -233,11 +233,11 @@ function MainView() {
                     )
                     .map((queue) => (
                       <tr key={Math.random()}>
-                        <td className="w-50 fs-2 py-3 text-start ps-3">
+                        <td className="fs-1 py-3">
                           {queue.office.name}
                         </td>
-                        <td className="fs-2 py-3">{queue.window_name}</td>
-                        <td className="fs-2 py-3">{queue.number}</td>
+                        <td className="fs-1 py-3">{queue.window_name}</td>
+                        <td className="fs-1 py-3">{queue.number}</td>
                       </tr>
                     ))
                 ) : (
@@ -258,7 +258,7 @@ function MainView() {
               "d-none": settings.show_media !== "true",
             }}
           >
-            <div className="d-flex flex-column">
+            <div className="d-flex flex-column h-100">
               {(ads.slot_one || []).length > 0 ? (
                 <>
                   {ads.slot_one[INDEX_OF_MEDIA_AT_SLOT_ONE.current] &&
@@ -273,8 +273,7 @@ function MainView() {
                         src={`${API_URL}/media/${
                           ads.slot_one[INDEX_OF_MEDIA_AT_SLOT_ONE.current].uuid
                         }/preview`}
-                        style={{ height: "360px"}}
-                        className="img-fluid w-100"
+                        className="img-fluid w-100 h-100"
                         alt={
                           ads.slot_one[INDEX_OF_MEDIA_AT_SLOT_ONE.current].name
                         }
@@ -290,12 +289,11 @@ function MainView() {
                         .toLowerCase()
                     ) && (
                       <video
-                        width="100%"
-                        height="360"
                         style={{
                           width: "100%",
                           objectFit: "fill",
                         }}
+                        className="h-100"
                         muted
                         autoPlay
                         loop
@@ -327,8 +325,7 @@ function MainView() {
                         src={`${API_URL}/media/${
                           ads.slot_two[INDEX_OF_MEDIA_AT_SLOT_TWO.current].uuid
                         }/preview`}
-                        className="img-fluid w-100"
-                        style={{ height: "360px"}}
+                        className="img-fluid w-100 h-100"
                         alt={
                           ads.slot_two[INDEX_OF_MEDIA_AT_SLOT_TWO.current].name
                         }
@@ -345,11 +342,11 @@ function MainView() {
                     ) && (
                       <video
                         width="100%"
-                        height="360"
+                        height="100%"
                         style={{
-                          width: "100%",
                           objectFit: "fill",
                         }}
+                        className="h-100"
                         muted
                         autoPlay
                         loop
@@ -420,9 +417,9 @@ function MainView() {
         </Row>
 
         {/* eslint-disable-next-line */}
-        <marquee className="bg-dark text-danger fixed-bottom fs-3">
-          LAGUNA STATE POLYTECHNIC UNIVERSITY
-        </marquee>
+          <marquee className="bg-dark text-danger fixed-bottom fs-2">
+            LAGUNA STATE POLYTECHNIC UNIVERSITY
+          </marquee>
       </Container>
     </>
   );

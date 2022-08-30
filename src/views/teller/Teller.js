@@ -193,13 +193,13 @@ function Teller() {
             </Row>
           </Col>
           <Col lg={4}>
-            <div>
+            {/* <div> */}
               <ListGroup
                 className="scrollable-list-group"
                 style={{ maxHeight: queueListHeight }}
               >
                 <ListGroup.Item
-                  className="fs-5 fw-bold text-center py-4 sticky-top"
+                  className="fs-5 fw-bold text-center py-4"
                   variant="dark"
                 >
                   {`Window ${user && user.window && user.window.name}`}
@@ -216,7 +216,7 @@ function Teller() {
                   <ListGroup.Item>No queue available</ListGroup.Item>
                 )}
               </ListGroup>
-            </div>
+            {/* </div> */}
           </Col>
         </Row>
       </Container>
