@@ -421,7 +421,7 @@ function MainView() {
 
         {/* eslint-disable-next-line */}
         <marquee className="bg-dark text-danger fixed-bottom fs-3">
-          LAGUNA STATE POLYTECHNIC UNIVERSITY
+          LAGUNA STATE POLYTECHNIC UNIVERSITY {settings.marquee || ""}
         </marquee>
       </Container>
     </>

@@ -30,6 +30,7 @@ function MediaList() {
   const [{ source }, dispatch] = useStateValue();
 
   const [_checked, setChecked] = useState(true);
+  const [marquee, setMarquee] = useState("");
   const [settings, setSettings] = useState([]);
   const [speed, setSpeed] = useState(1);
 
@@ -136,6 +137,18 @@ function MediaList() {
     });
   };
 
+  const handleSetMarqueeClick = () => {
+    const { source, request } = PATCH("/settings", {
+      name: "marquee",
+      value: marquee,
+    });
+
+    request.then((res) => {
+      console.log(res.data.message);
+      setMarquee("");
+    });
+  };
+
   useEffect(() => {
     getSettings();
   }, []);
@@ -177,10 +190,15 @@ function MediaList() {
                 <FormControl
                   type="text"
                   placeholder="Input annoucement on marquee"
+                  value={marquee}
+                  onChange={(e) => setMarquee(e.target.value)}
                 />
               </InputGroup>
 
-              <Button className="btn btn-primary text-group text-nowrap">
+              <Button
+                className="btn btn-primary text-group text-nowrap"
+                onClick={handleSetMarqueeClick}
+              >
                 Push
               </Button>
             </Col>
