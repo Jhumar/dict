@@ -215,7 +215,11 @@ function MainView() {
         <ViewingNavbar />
         <Row className="me-0">
           <Col xl={settings.show_media === "true" ? 8 : 12}>
-            <Table striped className="text-center p-0" style={{tableLayout: "fixed"}}>
+            <Table
+              striped
+              className="text-center p-0"
+              style={{ tableLayout: "fixed" }}
+            >
               <thead>
                 <tr>
                   <th className="fs-1">Office</th>
@@ -233,9 +237,7 @@ function MainView() {
                     )
                     .map((queue) => (
                       <tr key={Math.random()}>
-                        <td className="fs-1 py-3">
-                          {queue.office.name}
-                        </td>
+                        <td className="fs-1 py-3">{queue.office.name}</td>
                         <td className="fs-1 py-3">{queue.window_name}</td>
                         <td className="fs-1 py-3">{queue.number}</td>
                       </tr>
@@ -417,15 +419,9 @@ function MainView() {
         </Row>
 
         {/* eslint-disable-next-line */}
-<<<<<<< HEAD
         <marquee className="bg-dark text-danger fixed-bottom fs-3">
           LAGUNA STATE POLYTECHNIC UNIVERSITY {settings.marquee || ""}
         </marquee>
-=======
-          <marquee className="bg-dark text-danger fixed-bottom fs-2">
-            LAGUNA STATE POLYTECHNIC UNIVERSITY
-          </marquee>
->>>>>>> b277f91a6eeaf4d70dc5258d01cf2eb082f6e771
       </Container>
     </>
   );
