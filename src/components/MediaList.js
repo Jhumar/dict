@@ -183,7 +183,7 @@ function MediaList() {
           </Link>
         </Col>
 
-        <Row>
+        <Row className="pe-0">
           <Form className="d-flex">
             <Col lg={10} className="d-flex ms-auto mb-3 me-2">
               <InputGroup className="">
